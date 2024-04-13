@@ -24,8 +24,6 @@ func _init() -> void:
 	var count := 256
 	var _discard := colors.resize(count)
 	for i in count:
-		if i > 220:
-			pass
 		if i == count - 1:
 			colors[i] = samples[-1]
 		else:
