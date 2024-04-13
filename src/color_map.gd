@@ -39,6 +39,8 @@ var steps := 0:
 				stepped_colors.append(get_color(i * (step + step / maxf(steps - 1, 1)) / _color_count))
 			colors = stepped_colors
 		validate()
+## True for discrete color maps (color sets)
+var discrete := false
 
 var _color_count := 0
 
@@ -110,3 +112,5 @@ func _from_color_samples(
 	overflow = overflow_color
 	validate()
 	steps = color_steps
+	if discrete:
+		colors.assign(samples)
