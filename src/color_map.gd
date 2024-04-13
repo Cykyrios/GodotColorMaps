@@ -16,10 +16,13 @@ extends RefCounted
 ## [/codeblock]
 
 
+const UNDERFLOW := Color(0.3, 0.3, 0.3)
+const OVERFLOW := Color(0.7, 0.7, 0.7)
+
 ## Color used for values below 0.
-var underflow := Color(0.3, 0.3, 0.3)
+var underflow := UNDERFLOW
 ## Color used for values above 1.
-var overflow := Color(0.7, 0.7, 0.7)
+var overflow := OVERFLOW
 ## List of colors for this color map.
 var colors: Array[Color] = [Color(1, 0, 0), Color(0, 1, 0), Color(0, 0, 1)]
 ## Number of colors contained in the [member colors] array. Updated by calling [code]super()[/code]
