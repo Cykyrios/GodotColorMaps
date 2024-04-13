@@ -263,4 +263,4 @@ func _init() -> void:
 	]
 	underflow = Color(0.3, 0.3, 0.3)
 	overflow = Color(0.7, 0.7, 0.7)
-	super()
+	validate()
