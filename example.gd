@@ -38,7 +38,7 @@ func draw_color_map(color_map: ColorMap, offset: int) -> void:
 	var offset_h := 140
 	var offset_v := 32
 	var length := 300
-	var height := 50
+	var height := 33
 	var thickness := 20
 	var divisions: Array[int] = [256, 11]
 	for i in divisions.size():
