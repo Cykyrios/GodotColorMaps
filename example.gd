@@ -8,6 +8,9 @@ var color_maps: Array = []
 
 func _ready() -> void:
 	add_color_map("Viridis", ColorMapViridis.new())
+	add_color_map("Magma", ColorMapMagma.new())
+	add_color_map("Inferno", ColorMapInferno.new())
+	add_color_map("Plasma", ColorMapPlasma.new())
 	add_color_map("Turbo", ColorMapTurbo.new())
 	add_color_map("Jet", ColorMapJet.new())
 	add_color_map("Monochrome", ColorMapMonochrome.new())
