@@ -2,7 +2,7 @@ class_name ColorMapViridis
 extends ColorMap
 
 
-func _init() -> void:
+func _init(color_steps := 0) -> void:
 	colors = [
 		Color(0.26700401, 0.00487433, 0.32941519),
 		Color(0.26851048, 0.00960483, 0.33542652),
@@ -263,4 +263,4 @@ func _init() -> void:
 	]
 	underflow = Color(0.3, 0.3, 0.3)
 	overflow = Color(0.7, 0.7, 0.7)
-	validate()
+	super(color_steps)

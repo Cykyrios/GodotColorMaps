@@ -2,7 +2,7 @@ class_name ColorMapTurbo
 extends ColorMap
 
 
-func _init() -> void:
+func _init(color_steps := 0) -> void:
 	colors = [
 		Color(0.18995, 0.07176, 0.23217),
 		Color(0.19483, 0.08339, 0.26149),
@@ -263,4 +263,4 @@ func _init() -> void:
 	]
 	underflow = Color(0.3, 0.3, 0.3)
 	overflow = Color(0.7, 0.7, 0.7)
-	validate()
+	super(color_steps)

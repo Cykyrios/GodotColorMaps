@@ -28,23 +28,36 @@ var colors: Array[Color] = [Color(1, 0, 0), Color(0, 1, 0), Color(0, 0, 1)]:
 	set(color_array):
 		colors = color_array
 		validate()
+## Number of steps for non-smooth color maps
+var steps := 0:
+	set(value):
+		steps = value
+		if steps > 0:
+			var stepped_colors: Array[Color] = []
+			for i in steps:
+				var step := _color_count as float / steps
+				stepped_colors.append(get_color(i * (step + step / maxf(steps - 1, 1)) / _color_count))
+			colors = stepped_colors
+		validate()
 
 var _color_count := 0
 
 
-func _init() -> void:
+func _init(color_steps := 0) -> void:
 	validate()
+	steps = color_steps
 
 
 static func create_from_color_samples(
-	samples: PackedColorArray, underflow_color := ColorMap.UNDERFLOW, overflow_color := ColorMap.OVERFLOW
+	samples: PackedColorArray, color_steps := 0, underflow_color := ColorMap.UNDERFLOW,
+	overflow_color := ColorMap.OVERFLOW
 ) -> ColorMap:
 	if samples.size() == 0:
 		var _add := samples.append(Color.BLACK)
 	if samples.size() == 1:
 		var _add := samples.append(samples[0])
 	var color_map := ColorMap.new()
-	color_map._from_color_samples(samples, underflow_color, overflow_color)
+	color_map._from_color_samples(samples, color_steps, underflow_color, overflow_color)
 	return color_map
 
 
@@ -55,7 +68,18 @@ func get_color(normalized_value: float) -> Color:
 		return underflow
 	if normalized_value > 1:
 		return overflow
-	return colors[roundi(remap(normalized_value, 0, 1, 0, _color_count - 1))]
+	if is_nan(normalized_value):
+		return underflow
+	if steps == 0:
+		return colors[roundi(remap(normalized_value, 0, 1, 0, _color_count - 1))]
+	else:
+		var offset := 0.5 / steps
+		var test := roundi(remap(normalized_value, 0 + offset, 1 - offset, 0, _color_count - 1))
+		if test < 0:
+			return colors[0]
+		elif test >= _color_count:
+			return colors[-1]
+		return colors[test]
 
 
 ## This function returns a normalized value given a [param value] and the minimum and maximum
@@ -68,7 +92,9 @@ func validate() -> void:
 	_color_count = colors.size()
 
 
-func _from_color_samples(samples: PackedColorArray, underflow_color: Color, overflow_color: Color) -> void:
+func _from_color_samples(
+	samples: PackedColorArray, color_steps: int, underflow_color: Color, overflow_color: Color
+) -> void:
 	var sample_count := samples.size() - 1
 	var count := 256
 	var _discard := colors.resize(count)
@@ -83,3 +109,4 @@ func _from_color_samples(samples: PackedColorArray, underflow_color: Color, over
 	underflow = underflow_color
 	overflow = overflow_color
 	validate()
+	steps = color_steps

@@ -2,7 +2,7 @@ class_name ColorMapInferno
 extends ColorMap
 
 
-func _init() -> void:
+func _init(color_steps := 0) -> void:
 	colors = [
 		Color.hex(0x000004ff),
 		Color.hex(0x010005ff),
@@ -263,4 +263,4 @@ func _init() -> void:
 	]
 	underflow = Color(0.3, 0.3, 0.3)
 	overflow = Color(0.7, 0.7, 0.7)
-	validate()
+	super(color_steps)

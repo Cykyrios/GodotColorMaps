@@ -5,7 +5,7 @@ extends ColorMap
 ##
 ## Source: https://github.com/d3/d3-scale-chromatic/blob/main/src/diverging/RdYlGn.js
 
-func _init() -> void:
+func _init(color_steps := 0) -> void:
 	var samples := PackedColorArray([
 		Color.hex(0xa50026ff),
 		Color.hex(0xd73027ff),
@@ -19,4 +19,5 @@ func _init() -> void:
 		Color.hex(0x1a9850ff),
 		Color.hex(0x006837ff),
 	])
-	_from_color_samples(samples, Color(0.3, 0.3, 0.3), Color(0.7, 0.7, 0.7))
+	_from_color_samples(samples, color_steps, Color(0.3, 0.3, 0.3), Color(0.7, 0.7, 0.7))
+	super(color_steps)
