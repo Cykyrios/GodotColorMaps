@@ -23,33 +23,40 @@ func _ready() -> void:
 func _draw() -> void:
 	draw_rect(Rect2(0, 0, 1920, 1080), Color(0.4, 0.4, 0.4), true)
 	for i in color_maps.size():
-		draw_color_map(color_maps[i][1] as ColorMap, i)
+		draw_color_map(color_maps[i][1] as ColorMap, color_maps[i][2] as ColorMap, i)
 
 
-func add_color_map(text: String, color_map: ColorMap) -> void:
+func add_color_map(text: String, color_map: ColorMap, steps := 11) -> void:
 	var label := Label.new()
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.text = text
 	vbox.add_child(label)
-	color_maps.append([text, color_map])
+	var stepped_color_map := ColorMap.new()
+	stepped_color_map.colors = color_map.colors
+	stepped_color_map.steps = steps
+	stepped_color_map.discrete = color_map.discrete
+	color_maps.append([text, color_map, stepped_color_map])
 
 
-func draw_color_map(color_map: ColorMap, offset: int) -> void:
+func draw_color_map(original_color_map: ColorMap, stepped_color_map: ColorMap, offset: int) -> void:
+	var point_count := 256
+	var overflow_count := 10
 	var offset_h := 140
 	var offset_v := 32
-	var length := 300
+	var length := point_count + 2 * overflow_count + 20
 	var height := 33
 	var thickness := 20
-	var divisions: Array[int] = [256, 11]
-	for i in divisions.size():
-		var div := divisions[i]
+	var color_map: ColorMap = null
+	for i in 2:
+		color_map = original_color_map if i == 0 else stepped_color_map
 		var points := PackedVector2Array()
 		var colors := PackedColorArray()
-		for j in div:
-			var _discard := points.append(Vector2(offset_h + j * 256.0 / div + length * i,
+		for j in point_count + 2 * overflow_count:
+			var _discard := points.append(Vector2(offset_h + j + length * i,
 					offset_v + offset * height))
-			_discard = points.append(Vector2(offset_h + (j + 1) * 256.0 / div + length * i,
-					offset_v + offset * height))
-			var step := 256.0 / div
-			_discard = colors.append(color_map.get_color(j * (step + step / maxf(div - 1, 1)) / 256))
-		draw_multiline_colors(points, colors, thickness)
+		var normalized_color_data: Array[float] = []
+		for j in points.size():
+			normalized_color_data.append(color_map.get_normalized_value(
+					j - overflow_count, 0, point_count - 1))
+		colors = normalized_color_data.map(color_map.get_color)
+		draw_polyline_colors(points, colors, thickness)
