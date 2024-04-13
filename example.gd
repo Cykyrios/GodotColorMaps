@@ -11,6 +11,9 @@ func _ready() -> void:
 	add_color_map("Turbo", ColorMapTurbo.new())
 	add_color_map("Jet", ColorMapJet.new())
 	add_color_map("Monochrome", ColorMapMonochrome.new())
+	add_color_map("D3 RdYlGn", ColorMapD3RdYlGn.new())
+	add_color_map("D3 RdBu", ColorMapD3RdBu.new())
+	add_color_map("D3 Spectral", ColorMapD3Spectral.new())
 	queue_redraw()
 
 
