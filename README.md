@@ -12,6 +12,6 @@ Create an instance of any provided or custom `ColorMap`, use the `get_color(norm
 
 ## Examples
 
-The following image shows some of the provided color maps, drawn as 10-pixel wide lines with a pixel for each value horizontally, as well as 6 color bands.
+The following image shows some of the provided color maps, drawn as 20-pixel wide lines with a pixel for each value horizontally, as well as 11 color bands.
 
 ![Color Maps](https://github.com/Cykyrios/GodotColorMaps/blob/main/examples/color_maps.png?raw=true)
