@@ -21,7 +21,7 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	draw_rect(Rect2(0, 0, 1920, 1080), Color(0.5, 0.5, 0.5), true)
+	draw_rect(Rect2(0, 0, 1920, 1080), Color(0.4, 0.4, 0.4), true)
 	for i in color_maps.size():
 		draw_color_map(color_maps[i][1] as ColorMap, i)
 
