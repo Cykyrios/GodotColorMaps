@@ -46,7 +46,7 @@ func add_color_map(text: String, color_map: ColorMap, steps := 11) -> void:
 func draw_color_map(original_color_map: ColorMap, stepped_color_map: ColorMap, offset: int) -> void:
 	var point_count := 256
 	var overflow_count := 10
-	var offset_h := 140
+	var offset_h := 150
 	var offset_v := 32
 	var length := point_count + 2 * overflow_count + 20
 	var height := 33
