@@ -17,6 +17,11 @@ func _ready() -> void:
 	add_color_map("D3 RdYlGn", ColorMapD3RdYlGn.new())
 	add_color_map("D3 RdBu", ColorMapD3RdBu.new())
 	add_color_map("D3 Spectral", ColorMapD3Spectral.new())
+	add_color_map("D3 Blues", ColorMapD3Blues.new())
+	add_color_map("D3 Greens", ColorMapD3Greens.new())
+	add_color_map("D3 Reds", ColorMapD3Reds.new())
+	add_color_map("D3 Category 10", ColorMapD3Category10.new())
+	add_color_map("D3 Paired", ColorMapD3Paired.new())
 	queue_redraw()
 
 
