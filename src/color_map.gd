@@ -87,6 +87,8 @@ func get_color(normalized_value: float) -> Color:
 ## This function returns a normalized value given a [param value] and the minimum and maximum
 ## values [param min_value] and [param max_value]. This can be used with [method get_color].
 func get_normalized_value(value: float, min_value: float, max_value: float) -> float:
+	if is_equal_approx(min_value, max_value):
+		return 0
 	return remap(value, min_value, max_value, 0, 1)
 
 
