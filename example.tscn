@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b806ht8y0n5r8"]
 
-[ext_resource type="Script" path="res://addons/color_maps/example.gd" id="1_sswnw"]
+[ext_resource type="Script" uid="uid://bch6fpq5t5b0c" path="res://example.gd" id="1_sswnw"]
 
 [node name="MarginContainer" type="MarginContainer"]
 theme_override_constants/margin_left = 20

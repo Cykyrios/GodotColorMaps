@@ -14,4 +14,4 @@ you can pass the result of `get_normalized_value(value, min_value, max_value)` i
 The following image shows some of the provided color maps, drawn as 20-pixel wide lines with a pixel
 for each value horizontally, as well as 11 color bands.
 
-![Color Maps](./examples/color_maps.png)
+![Color Maps](../../examples/color_maps.png)
